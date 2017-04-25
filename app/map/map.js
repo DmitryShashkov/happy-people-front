@@ -48,6 +48,9 @@ angular.module('myApp.map', ['ngRoute'])
                         console.log('rejected');
                     });
                 });
+        },
+        onRegionTipShow: function(e, el, code) {
+            el.html(el.html() + ' (code: ' + code + ')');
         }
     });
 
