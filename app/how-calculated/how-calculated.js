@@ -4,7 +4,7 @@ angular.module('myApp.howCalculated', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/how-it-was-calculated', {
-    templateUrl: 'howCalculated/howCalculated.html',
+    templateUrl: 'how-calculated/how-calculated.html',
     controller: 'HowCalculatedCtrl'
   });
 }])

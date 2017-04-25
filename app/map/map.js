@@ -13,10 +13,20 @@ angular.module('myApp.map', ['ngRoute'])
     '$scope', '$uibModal', 'countriesService',
     function ($scope, $uibModal, countriesService) {
 
-    $('#map-container').vectorMap({
-        map: 'world_mill',
-        backgroundColor: '#151c46',
-        onRegionClick: function (event, code) {
+        var palette = ['#66C2A5', '#FC8D62', '#8DA0CB', '#E78AC3', '#A6D854'];
+
+        function generateColors (){
+            var colors = {},
+                key;
+
+            for (key in map.regions) {
+                // noinspection JSUnfilteredForInLoop
+                colors[key] = palette[Math.floor(Math.random()*palette.length)];
+            }
+            return colors;
+        }
+
+        function onRegionClick (event, code) {
             var requestedCountry = $scope.countries
                 .filter(function (country) {
                     return country['Code'] === code;
@@ -48,11 +58,32 @@ angular.module('myApp.map', ['ngRoute'])
                         console.log('rejected');
                     });
                 });
-        },
-        onRegionTipShow: function(e, el, code) {
+        }
+
+        function onRegionTipShow (e, el, code) {
             el.html(el.html() + ' (code: ' + code + ')');
         }
-    });
+
+        var map = new jvm.Map({
+            map: 'world_mill',
+            container: $('#map-container'),
+            backgroundColor: '#77c9d4',
+            onRegionClick: onRegionClick,
+            onRegionTipShow: onRegionTipShow,
+            series: {
+                regions: [{
+                    attribute: 'fill'
+                }]
+            }
+        });
+        map.series.regions[0].setValues(generateColors());
+
+    // $('#map-container').vectorMap({
+    //     map: 'world_mill',
+    //     backgroundColor: '#77c9d4',
+    //     onRegionClick: onRegionClick,
+    //     onRegionTipShow: onRegionTipShow
+    // });
 
     countriesService.getAllCountries()
         .then(function (res) {
