@@ -15,6 +15,7 @@ angular.module('myApp.map', ['ngRoute'])
 
     $('#map-container').vectorMap({
         map: 'world_mill',
+        backgroundColor: '#151c46',
         onRegionClick: function (event, code) {
             var requestedCountry = $scope.countries
                 .filter(function (country) {

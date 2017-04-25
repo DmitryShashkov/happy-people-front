@@ -1,9 +1,12 @@
-/* app css stylesheet */
+* {
+    box-sizing: border-box;
+}
 
 .menu {
   list-style: none;
+    height: 50px;
   border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
+  margin: 0;
   padding: 0 0 0.5em;
 }
 
@@ -25,6 +28,6 @@
 }
 
 #map-container {
-  width: 800px;
-  height: 600px;
+  width: 100%;
+  height: calc(100vh - 50px);
 }
